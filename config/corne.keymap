@@ -9,11 +9,13 @@
  */
 
 #include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 
 / {
     behaviors {
         /* Standard mod-tap: balanced, tap-biased during fast typing */
+
         hm: hold_mod {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -25,6 +27,7 @@
         };
 
         /* Yeet key (Cmd/Bksp): hold-while-undecided for instant Cmd */
+
         hm_yeet: hold_mod_yeet {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -36,6 +39,7 @@
         };
 
         /* Layer-tap with require-prior-idle to avoid misfires on Z */
+
         lt_hp: layer_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -56,42 +60,49 @@
             timeout-ms = <50>;
             layers = <0>;
         };
+
         combo_lbrace {
             bindings = <&kp LBRC>;
             key-positions = <16 17>;
             timeout-ms = <50>;
             layers = <0>;
         };
+
         combo_lbkt {
             bindings = <&kp LBKT>;
             key-positions = <28 29>;
             timeout-ms = <50>;
             layers = <0>;
         };
+
         combo_pipe {
             bindings = <&kp PIPE>;
             key-positions = <25 26>;
             timeout-ms = <50>;
             layers = <0>;
         };
+
         combo_rparen {
             bindings = <&kp RPAR>;
             key-positions = <6 7>;
             timeout-ms = <50>;
             layers = <0>;
         };
+
         combo_rbrace {
             bindings = <&kp RBRC>;
             key-positions = <18 19>;
             timeout-ms = <50>;
             layers = <0>;
         };
+
         combo_rbkt {
             bindings = <&kp RBKT>;
             key-positions = <30 31>;
             timeout-ms = <50>;
             layers = <0>;
         };
+
         combo_bslh {
             bindings = <&kp BSLH>;
             key-positions = <34 35>;
@@ -105,28 +116,28 @@
 
         default_layer {
             bindings = <
-                &lt_hp 1 ESC  &kp Q  &kp W  &kp E  &kp R  &kp T      &kp Y  &kp U  &kp I      &kp O    &kp P      &lt_hp 2 MINUS
-                &kp TAB       &kp A  &kp S  &kp D  &kp F  &kp G      &kp H  &kp J  &kp K      &kp L    &kp SEMI   &kp EQUAL
-                &kp LSHFT     &lt_hp 2 Z  &kp X  &kp C  &kp V  &kp B  &kp N  &kp M  &kp COMMA  &kp DOT  &lt_hp 1 FSLH  &kp SQT
-                              &hm LCTRL GRAVE  &hm LALT DEL  &hm_yeet LGUI BSPC    &hm RGUI SPACE  &hm RALT RET  &kp RCTRL
+&lt_hp 1 ESC  &kp Q       &kp W  &kp E            &kp R         &kp T                 &kp Y           &kp U         &kp I      &kp O    &kp P          &lt_hp 2 MINUS
+&kp TAB       &kp A       &kp S  &kp D            &kp F         &kp G                 &kp H           &kp J         &kp K      &kp L    &kp SEMI       &kp EQUAL
+&kp LSHFT     &lt_hp 2 Z  &kp X  &kp C            &kp V         &kp B                 &kp N           &kp M         &kp COMMA  &kp DOT  &lt_hp 1 FSLH  &kp SQT
+                                 &hm LCTRL GRAVE  &hm LALT DEL  &hm_yeet LGUI BSPC    &hm RGUI SPACE  &hm RALT RET  &kp RCTRL
             >;
         };
 
-        layer_1 {
+        LOWER {
             bindings = <
-                &trans  &kp F1  &kp F2  &kp F3  &kp F4   &kp F5       &trans    &trans    &trans  &trans     &kp PG_UP  &trans
-                &trans  &kp F6  &kp F7  &kp F8  &kp F9   &kp F10      &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans     &trans
-                &trans  &trans  &trans  &trans   &kp F11  &kp F12      &trans    &trans    &trans  &kp PG_DN  &trans     &trans
-                                &trans  &trans   &trans                 &trans    &trans    &trans
+&trans  &kp F1  &kp F2  &kp F3  &kp F4   &kp F5     &kp LA(LEFT)  &kp LA(DOWN)  &kp LA(UP_ARROW)  &kp LA(RIGHT)  &kp PG_UP      &trans
+&trans  &kp F6  &kp F7  &kp F8  &kp F9   &kp F10    &kp LEFT      &kp DOWN      &kp UP            &kp RIGHT      &trans         &trans
+&trans  &trans  &trans  &trans  &kp F11  &kp F12    &kp LG(LEFT)  &kp LG(DOWN)  &kp LG(UP_ARROW)  &kp RG(RIGHT)  &kp PAGE_DOWN  &trans
+                        &trans  &trans   &trans     &trans        &trans        &trans
             >;
         };
 
-        layer_2 {
+        UPPER {
             bindings = <
-                &trans  &kp EXCL   &kp AT    &kp HASH  &kp DLLR   &kp PRCNT    &kp N7  &kp N8     &kp N9  &trans  &trans  &trans
-                &trans  &kp CARET  &kp AMPS  &kp STAR  &kp LPAR   &kp RPAR     &kp N4  &kp N5     &kp N6  &trans  &trans  &trans
-                &trans  &trans     &trans    &trans     &trans     &trans       &kp N1  &kp N2     &kp N3  &trans  &trans  &trans
-                                   &trans    &trans     &kp DOT                &kp COMMA  &kp N0  &trans
+&trans  &kp EXCL   &kp AT    &kp HASH  &kp DLLR  &kp PRCNT    &kp N7     &kp N8  &kp N9      &trans  &trans  &bt BT_CLR_ALL
+&trans  &kp CARET  &kp AMPS  &kp STAR  &kp LPAR  &kp RPAR     &kp N4     &kp N5  &kp N6      &trans  &trans  &bt BT_NXT
+&trans  &trans     &trans    &trans    &trans    &trans       &kp N1     &kp N2  &kp N3      &trans  &trans  &trans
+                             &trans    &trans    &trans       &kp COMMA  &kp N0  &kp PERIOD
             >;
         };
     };
