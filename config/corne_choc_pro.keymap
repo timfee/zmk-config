@@ -16,52 +16,121 @@
 };
 
 / {
+    behaviors {
+        hm: hold_mod {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <150>;
+            quick-tap-ms = <125>;
+            require-prior-idle-ms = <100>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        hm_yeet: hold_mod_yeet {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            hold-while-undecided;
+            bindings = <&kp>, <&kp>;
+        };
+
+        lt_hp: layer_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <150>;
+            quick-tap-ms = <125>;
+            require-prior-idle-ms = <105>;
+            bindings = <&mo>, <&kp>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        combo_lparen {
+            bindings = <&kp LPAR>;
+            key-positions = <4 5>;
+            timeout-ms = <50>;
+            layers = <0>;
+        };
+        combo_lbrace {
+            bindings = <&kp LBRC>;
+            key-positions = <18 19>;
+            timeout-ms = <50>;
+            layers = <0>;
+        };
+        combo_lbkt {
+            bindings = <&kp LBKT>;
+            key-positions = <32 33>;
+            timeout-ms = <50>;
+            layers = <0>;
+        };
+        combo_pipe {
+            bindings = <&kp PIPE>;
+            key-positions = <29 30>;
+            timeout-ms = <50>;
+            layers = <0>;
+        };
+        combo_rparen {
+            bindings = <&kp RPAR>;
+            key-positions = <8 9>;
+            timeout-ms = <50>;
+            layers = <0>;
+        };
+        combo_rbrace {
+            bindings = <&kp RBRC>;
+            key-positions = <22 23>;
+            timeout-ms = <50>;
+            layers = <0>;
+        };
+        combo_rbkt {
+            bindings = <&kp RBKT>;
+            key-positions = <34 35>;
+            timeout-ms = <50>;
+            layers = <0>;
+        };
+        combo_bslh {
+            bindings = <&kp BSLH>;
+            key-positions = <38 39>;
+            timeout-ms = <50>;
+            layers = <0>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             display-name = "QWERTY";
-            // --------------------------------------------------------------------------------
-            // |  TAB |  Q  |  W  |  E  |  R  |  T  |  MUTE |  PP   |  Y  |  U   |  I  |  O  |  P  | BSPC |
-            // | CTRL |  A  |  S  |  D  |  F  |  G  |  LALT |  RALT |  H  |  J   |  K  |  L  |  ;  |  '   |
-            // | SHFT |  Z  |  X  |  C  |  V  |  B  |               |  N  |  M   |  ,  |  .  |  /  | ESC  |
-            //                    | GUI | LWR | SPC |               | ENT | RSE  | ALT |
             bindings = <
-                &kp TAB   &kp Q &kp W &kp E &kp R &kp T &kp C_MUTE &kp C_PP &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-                &kp LCTRL &kp A &kp S &kp D &kp F &kp G &kp LALT   &kp RALT &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-                &kp LSHFT &kp Z &kp X &kp C &kp V &kp B                     &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
-                                      &kp LGUI &mo 1 &kp SPACE              &kp RET &mo 2 &kp RALT
+                &lt_hp 1 ESC  &kp Q       &kp W  &kp E             &kp R         &kp T          &none &none    &kp Y           &kp U         &kp I      &kp O    &kp P          &lt_hp 2 MINUS
+                &kp TAB       &kp A       &kp S  &kp D             &kp F         &kp G          &none &none    &kp H           &kp J         &kp K      &kp L    &kp SEMI       &kp EQUAL
+                &kp LSHFT     &lt_hp 2 Z  &kp X  &kp C             &kp V         &kp B                        &kp N           &kp M         &kp COMMA  &kp DOT  &lt_hp 1 FSLH  &kp SQT
+                                                  &hm LCTRL GRAVE  &hm LALT DEL  &hm_yeet LGUI BSPC           &hm RGUI SPACE  &hm RALT RET  &kp RCTRL
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp PG_UP PG_DN &inc_dec_kp C_PREV C_NEXT &inc_dec_kp C_BRI_DN C_BRI_UP>;
         };
 
         lower_layer {
-            display-name = "NUMBER";
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  1  |  2  |  3  |  4  |  5    |  LCTRL | RCTRL |  6  |  7  |  8  |  9  |  0  | BSPC |
-            // | CTRL | BT1 | BT2 | BT3 | BT4 | BT5   |  LALT  | RALT  | LFT | DWN |  UP | RGT |     |      |
-            // | SHFT | BTCR| RGB | RST | BOOT| Unlock|        |       |     |     |     |     |     |      |
-            //                    | GUI |     | SPC   |        | ENT   |     | ALT |
+            display-name = "NAV/FN";
             bindings = <
-                &kp TAB   &kp N1       &kp N2          &kp N3       &kp N4       &kp N5       &kp LCTRL &kp RCTRL &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-                &kp LCTRL &bt BT_SEL 0 &bt BT_SEL 1    &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &kp LALT  &kp RALT  &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-                &kp LSHFT &bt BT_CLR   &rgb_ug RGB_TOG &sys_reset   &bootloader  &studio_unlock                   &trans   &trans   &trans &trans    &trans &trans
-                                                       &kp LGUI     &trans       &kp SPACE                        &kp LGUI &trans   &kp SPACE
+                &trans  &kp F1  &kp F2  &kp F3  &kp F4   &kp F5   &none &none    &trans    &trans    &trans  &trans     &kp PG_UP  &trans
+                &trans  &kp F6  &kp F7  &kp F8  &kp F9   &kp F10  &none &none    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans     &trans
+                &trans  &trans  &trans  &trans   &kp F11  &kp F12                 &trans    &trans    &trans  &kp PG_DN  &trans     &trans
+                                        &trans   &trans   &trans                  &trans    &trans    &trans
             >;
         };
 
         raise_layer {
-            display-name = "SYMBOL";
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  !  |  @  |  #  |  $  |  %  | LCTRL | RCTRL |  ^  |  &  |  *  |  (  |  )  | BSPC |
-            // | CTRL |     |     |     |     |     |  LALT | RALT  |  -  |  =  |  [  |  ]  |  \  |  `   |
-            // | SHFT |     |     |     |     |     |               |  _  |  +  |  {  |  }  | "|" |  ~   |
-            //                    | GUI |     | SPC |               | ENT |     | ALT |
+            display-name = "NUM/SYM";
             bindings = <
-                &kp  TAB  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT &kp LCTRL &kp RCTRL &kp CARET &kp AMPS &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
-                &kp LCTRL &trans   &trans &trans   &trans   &trans    &kp LALT  &kp RALT  &kp MINUS &kp EQUAL &kp LBKT &kp RBKT &kp BSLH &kp GRAVE
-                &kp LSHFT &trans   &trans &trans   &trans   &trans                        &kp UNDER &kp PLUS  &kp LBRC &kp RBRC &kp PIPE &kp TILDE
-                                          &kp LGUI &trans   &kp SPACE                     &kp RET   &trans    &kp RALT
+                &trans  &kp EXCL   &kp AT    &kp HASH  &kp DLLR  &kp PRCNT  &none &none    &kp N7     &kp N8  &kp N9      &trans  &trans  &trans
+                &trans  &kp CARET  &kp AMPS  &kp STAR  &kp LPAR  &kp RPAR   &none &none    &kp N4     &kp N5  &kp N6      &trans  &trans  &bt BT_NXT
+                &trans  &trans     &trans    &trans    &trans    &trans                    &kp N1     &kp N2  &kp N3      &trans  &trans  &bt BT_CLR
+                                             &trans    &trans    &kp DOT                  &kp COMMA  &kp N0  &kp PERIOD
             >;
         };
 
@@ -71,7 +140,7 @@
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans               &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans               &trans &trans &trans       
+                                     &trans &trans &trans               &trans &trans &trans
             >;
         };
 
@@ -81,7 +150,7 @@
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans               &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans               &trans &trans &trans       
+                                     &trans &trans &trans               &trans &trans &trans
             >;
         };
 
@@ -91,7 +160,7 @@
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans               &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans               &trans &trans &trans       
+                                     &trans &trans &trans               &trans &trans &trans
             >;
         };
 
@@ -101,7 +170,7 @@
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans               &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans               &trans &trans &trans       
+                                     &trans &trans &trans               &trans &trans &trans
             >;
         };
 
@@ -111,7 +180,7 @@
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans               &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans               &trans &trans &trans       
+                                     &trans &trans &trans               &trans &trans &trans
             >;
         };
 
@@ -121,7 +190,7 @@
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans &trans               &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans               &trans &trans &trans       
+                                     &trans &trans &trans               &trans &trans &trans
             >;
         };
     };
