@@ -107,30 +107,30 @@
         default_layer {
             display-name = "QWERTY";
             bindings = <
-                &lt_hp 1 ESC  &kp Q       &kp W  &kp E             &kp R         &kp T          &none &none    &kp Y           &kp U         &kp I      &kp O    &kp P          &lt_hp 2 MINUS
-                &kp TAB       &kp A       &kp S  &kp D             &kp F         &kp G          &none &none    &kp H           &kp J         &kp K      &kp L    &kp SEMI       &kp EQUAL
-                &kp LSHFT     &lt_hp 2 Z  &kp X  &kp C             &kp V         &kp B                        &kp N           &kp M         &kp COMMA  &kp DOT  &lt_hp 1 FSLH  &kp SQT
-                                                  &hm LCTRL GRAVE  &hm LALT DEL  &hm_yeet LGUI BSPC           &hm RGUI SPACE  &hm RALT RET  &kp RCTRL
+                &lt_hp 1 ESC  &kp Q       &kp W  &kp E             &kp R         &kp T              &none &none    &kp Y           &kp U         &kp I      &kp O    &kp P          &lt_hp 2 MINUS
+                &kp TAB       &kp A       &kp S  &kp D             &kp F         &kp G              &none &none    &kp H           &kp J         &kp K      &kp L    &kp SEMI       &kp EQUAL
+                &kp LSHFT     &lt_hp 2 Z  &kp X  &kp C             &kp V         &kp B                             &kp N           &kp M         &kp COMMA  &kp DOT  &lt_hp 1 FSLH  &kp SQT
+                                                  &hm LCTRL GRAVE  &hm LALT DEL  &hm_yeet LGUI BSPC                &hm RGUI SPACE  &hm RALT RET  &kp RCTRL
             >;
         };
 
         lower_layer {
             display-name = "NAV/FN";
             bindings = <
-                &trans  &kp F1  &kp F2  &kp F3  &kp F4   &kp F5   &none &none    &trans    &trans    &trans  &trans     &kp PG_UP  &trans
-                &trans  &kp F6  &kp F7  &kp F8  &kp F9   &kp F10  &none &none    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans     &trans
-                &trans  &trans  &trans  &trans   &kp F11  &kp F12                 &trans    &trans    &trans  &kp PG_DN  &trans     &trans
-                                        &trans   &trans   &trans                  &trans    &trans    &trans
+                &trans  &kp F1  &kp F2  &kp F3  &kp F4   &kp F5   &none &none    &kp LA(LEFT)  &kp LA(DOWN)  &kp LA(UP_ARROW)  &kp LA(RIGHT)  &kp PG_UP      &trans
+                &trans  &kp F6  &kp F7  &kp F8  &kp F9   &kp F10  &none &none    &kp LEFT      &kp DOWN      &kp UP            &kp RIGHT      &trans         &trans
+                &trans  &trans  &trans  &trans   &kp F11  &kp F12                 &kp LG(LEFT)  &kp LG(DOWN)  &kp LG(UP_ARROW)  &kp RG(RIGHT)  &kp PAGE_DOWN  &trans
+                                        &trans   &trans   &trans                  &trans        &trans        &trans
             >;
         };
 
         raise_layer {
             display-name = "NUM/SYM";
             bindings = <
-                &trans  &kp EXCL   &kp AT    &kp HASH  &kp DLLR  &kp PRCNT  &none &none    &kp N7     &kp N8  &kp N9      &trans  &trans  &trans
+                &trans  &kp EXCL   &kp AT    &kp HASH  &kp DLLR  &kp PRCNT  &none &none    &kp N7     &kp N8  &kp N9      &trans  &trans  &bt BT_CLR_ALL
                 &trans  &kp CARET  &kp AMPS  &kp STAR  &kp LPAR  &kp RPAR   &none &none    &kp N4     &kp N5  &kp N6      &trans  &trans  &bt BT_NXT
-                &trans  &trans     &trans    &trans    &trans    &trans                    &kp N1     &kp N2  &kp N3      &trans  &trans  &bt BT_CLR
-                                             &trans    &trans    &kp DOT                  &kp COMMA  &kp N0  &kp PERIOD
+                &trans  &trans     &trans    &trans    &trans    &trans                    &kp N1     &kp N2  &kp N3      &trans  &trans  &trans
+                                             &trans    &trans    &trans                   &kp COMMA  &kp N0  &kp PERIOD
             >;
         };
 
